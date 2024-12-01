@@ -1,6 +1,6 @@
-import { ensureDir } from 'jsr:@std/fs';
-import { parseArgs } from 'jsr:@std/cli';
-import { dirname, join, relative } from 'jsr:@std/path';
+import { ensureDir } from 'jsr:@std/fs@1.0.6';
+import { parseArgs } from 'jsr:@std/cli@1.0.7';
+import { dirname, join, relative } from 'jsr:@std/path@1.0.8';
 import { scanDirectory } from './scanDir.ts';
 import { transformFileContent } from './transformFileContent.ts';
 import { getComponentVariations } from './getComponentVariations.ts';
