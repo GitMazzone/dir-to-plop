@@ -1,5 +1,5 @@
 import type { FileInfo } from './types.ts';
-import { join } from 'jsr:@std/path';
+import { join } from 'jsr:@std/path@1.0.8';
 
 export async function scanDirectory(dirPath: string): Promise<FileInfo[]> {
 	const files: FileInfo[] = [];
