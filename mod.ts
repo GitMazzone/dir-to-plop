@@ -1,10 +1,6 @@
-import { ensureDir } from 'https://deno.land/std@0.224.0/fs/ensure_dir.ts';
-import { parseArgs } from 'https://deno.land/std@0.224.0/cli/mod.ts';
-import {
-	dirname,
-	join,
-	relative,
-} from 'https://deno.land/std@0.224.0/path/mod.ts';
+import { ensureDir } from 'jsr:@std/fs';
+import { parseArgs } from 'jsr:@std/cli';
+import { dirname, join, relative } from 'jsr:@std/path';
 import { scanDirectory } from './scanDir.ts';
 import { transformFileContent } from './transformFileContent.ts';
 import { getComponentVariations } from './getComponentVariations.ts';

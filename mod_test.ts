@@ -1,6 +1,6 @@
-import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
-import { join } from 'https://deno.land/std@0.224.0/path/mod.ts';
-import { ensureDir } from 'https://deno.land/std@0.224.0/fs/ensure_dir.ts';
+import { assertEquals } from 'jsr:@std/assert';
+import { join } from 'jsr:@std/path';
+import { ensureDir } from 'jsr:@std/fs';
 import { convertToTemplate } from './mod.ts';
 
 // Helper function to clean up test directories
