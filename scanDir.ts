@@ -1,5 +1,5 @@
 import type { FileInfo } from './types.ts';
-import { join } from 'jsr:@std/path@1.0.8';
+import { join } from 'node:path';
 
 /**
  * Recursively scans a directory and returns information about all files and subdirectories

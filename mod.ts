@@ -1,9 +1,9 @@
-import { ensureDir } from 'jsr:@std/fs@1.0.6';
-import { parseArgs } from 'jsr:@std/cli@1.0.7';
-import { dirname, join, relative } from 'jsr:@std/path@1.0.8';
+import { join, relative, dirname } from 'node:path';
+import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { scanDirectory } from './scanDir.ts';
 import { transformFileContent } from './transformFileContent.ts';
 import { getComponentVariations } from './getComponentVariations.ts';
+import process from 'node:process';
 
 /**
  * Converts a directory containing a component into a Plop template directory.
@@ -17,8 +17,8 @@ export async function convertToTemplate(
 	outputPath: string
 ) {
 	try {
-		const sourceInfo = await Deno.stat(sourcePath);
-		if (!sourceInfo.isDirectory) {
+		const sourceInfo = await stat(sourcePath);
+		if (!sourceInfo.isDirectory()) {
 			throw new Error('Source path must be a directory');
 		}
 	} catch (error) {
@@ -29,7 +29,7 @@ export async function convertToTemplate(
 	}
 
 	// Create output directory if it doesn't exist
-	await ensureDir(outputPath);
+	await mkdir(outputPath, { recursive: true });
 
 	// Scan the directory
 	const files = await scanDirectory(sourcePath);
@@ -52,7 +52,7 @@ export async function convertToTemplate(
 	for (const file of files) {
 		if (file.isDirectory) {
 			const relativePath = relative(sourcePath, file.path);
-			await ensureDir(join(outputPath, relativePath));
+			await mkdir(join(outputPath, relativePath), { recursive: true });
 			continue;
 		}
 
@@ -92,21 +92,18 @@ export async function convertToTemplate(
 		const outputFilePath = join(outputPath, relativePath);
 		const outputFileDir = dirname(outputFilePath);
 
-		await ensureDir(outputFileDir);
-		await Deno.writeTextFile(
-			join(outputFileDir, newFileName),
-			transformedContent
-		);
+		await mkdir(outputFileDir, { recursive: true });
+		await writeFile(join(outputFileDir, newFileName), transformedContent);
 	}
 }
 
 if (import.meta.main) {
-	const args = parseArgs(Deno.args);
-	const [sourcePath, outputPath] = args._;
+	const args = process.argv.slice(2);
+	const [sourcePath, outputPath] = args;
 
 	if (!sourcePath || !outputPath) {
 		console.log('Usage: dtp <source-directory> <output-directory>');
-		Deno.exit(1);
+		process.exit(1);
 	}
 
 	try {
@@ -117,6 +114,6 @@ if (import.meta.main) {
 		} else {
 			console.error('An unknown error occurred');
 		}
-		Deno.exit(1);
+		process.exit(1);
 	}
 }
