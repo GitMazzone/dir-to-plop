@@ -1,5 +1,10 @@
 import type { ComponentInfo } from './types.ts';
 
+/**
+ * Generates variations of a component name in different case styles
+ * @param componentName The original component name (expected to be in PascalCase)
+ * @returns An object containing the original name and its variations in pascal, camel, kebab, and snake case
+ */
 export function getComponentVariations(componentName: string): ComponentInfo {
 	return {
 		name: componentName,

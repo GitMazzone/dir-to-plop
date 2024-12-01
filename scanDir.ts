@@ -1,6 +1,11 @@
 import type { FileInfo } from './types.ts';
 import { join } from 'jsr:@std/path@1.0.8';
 
+/**
+ * Recursively scans a directory and returns information about all files and subdirectories
+ * @param dirPath The directory path to scan
+ * @returns Promise resolving to an array of FileInfo objects containing path, name, and directory status
+ */
 export async function scanDirectory(dirPath: string): Promise<FileInfo[]> {
 	const files: FileInfo[] = [];
 

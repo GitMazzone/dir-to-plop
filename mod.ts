@@ -5,6 +5,13 @@ import { scanDirectory } from './scanDir.ts';
 import { transformFileContent } from './transformFileContent.ts';
 import { getComponentVariations } from './getComponentVariations.ts';
 
+/**
+ * Converts a directory containing a component into a Plop template directory.
+ * Looks for a PascalCase file as the main component and transforms all related files.
+ * @param sourcePath Path to the source directory containing the component
+ * @param outputPath Path where the template directory should be created
+ * @throws Error if source path doesn't exist or no PascalCase component file is found
+ */
 export async function convertToTemplate(
 	sourcePath: string,
 	outputPath: string
