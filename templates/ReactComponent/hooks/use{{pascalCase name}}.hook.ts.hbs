@@ -1,0 +1,20 @@
+import { useState, useEffect } from 'react';
+import { get{{pascalCase name}} } from '../utils';
+import type { {{pascalCase name}}RendererProps } from '../{{pascalCase name}}.types';
+
+export function use{{pascalCase name}}(): Omit<{{pascalCase name}}RendererProps, 'className'> {
+  const [data, setData] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await get{{pascalCase name}}();
+      setData(result);
+      setIsLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  return { data, isLoading };
+}

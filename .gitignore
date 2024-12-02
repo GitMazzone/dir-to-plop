@@ -1,1 +1,5 @@
+# ---> Package-specific
 test-component
+
+# ---> MacOS
+.DS_Store

@@ -1,9 +1,64 @@
 import { join, relative, dirname } from 'node:path';
-import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { mkdir, stat, writeFile, cp } from 'node:fs/promises';
+import { createInterface } from 'node:readline/promises';
 import { scanDirectory } from './scanDir.ts';
 import { transformFileContent } from './transformFileContent.ts';
 import { getComponentVariations } from './getComponentVariations.ts';
 import process from 'node:process';
+import { STARTER_TEMPLATES, type TemplateType } from './types.ts';
+
+/**
+ * Prompts user to select a starter template using a CLI menu
+ * @returns Promise resolving to selected template type
+ * @throws Error if stdin/stdout interaction fails
+ */
+async function promptForTemplate(): Promise<TemplateType> {
+	const rl = createInterface({
+		input: process.stdin,
+		output: process.stdout,
+		terminal: false,
+	});
+
+	try {
+		const templates = Object.entries(STARTER_TEMPLATES);
+		console.log('======= SELECT A TEMPLATE =======');
+		templates.forEach(([_key, { name }], index) => {
+			console.log(`${index + 1}) ${name}`);
+		});
+
+		const input = await rl.question(
+			'Enter the number of the template you want to generate: '
+		);
+		return templates[parseInt(input.trim() || '1', 10) - 1][0] as TemplateType;
+	} finally {
+		rl.close();
+	}
+}
+
+/**
+ * Creates a new project from a starter template
+ * @param outputPath Path where the template should be created
+ * @param templateType Optional template type. If not provided, user will be prompted
+ */
+async function createStarterTemplate(
+	outputPath: string,
+	templateType?: TemplateType
+): Promise<void> {
+	const template = templateType || (await promptForTemplate());
+	const templatePath = STARTER_TEMPLATES[template].path;
+
+	try {
+		await stat(templatePath);
+		await mkdir(outputPath, { recursive: true });
+		await cp(templatePath, outputPath, { recursive: true });
+		console.log(`Created ${template} template in ${outputPath}`);
+	} catch (error) {
+		if (error instanceof Error) {
+			throw new Error(`Failed to create template: ${error.message}`);
+		}
+		throw error;
+	}
+}
 
 /**
  * Converts a directory containing a component into a Plop template directory.
@@ -99,15 +154,35 @@ export async function convertToTemplate(
 
 if (import.meta.main) {
 	const args = process.argv.slice(2);
-	const [sourcePath, outputPath] = args;
 
-	if (!sourcePath || !outputPath) {
-		console.log('Usage: dtp <source-directory> <output-directory>');
+	if (!args.length) {
+		console.log('Usage: dir-to-plop <source-directory> <output-directory>');
+		console.log('   or: dir-to-plop --starter <output-directory>');
+		console.log(
+			'   or: dir-to-plop --starter-react-component <output-directory>'
+		);
 		process.exit(1);
 	}
 
 	try {
-		await convertToTemplate(String(sourcePath), String(outputPath));
+		if (args[0] === '--starter') {
+			if (!args[1]) {
+				console.error('Error: Output directory is required');
+				process.exit(1);
+			}
+			await createStarterTemplate(args[1]);
+		} else if (args[0] === '--starter-react-component') {
+			if (!args[1]) {
+				console.error('Error: Output directory is required');
+				process.exit(1);
+			}
+			await createStarterTemplate(args[1], 'ReactComponent');
+		} else if (args[0] && args[1]) {
+			await convertToTemplate(args[0], args[1]);
+		} else {
+			console.error('Error: Invalid arguments');
+			process.exit(1);
+		}
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(`Error: ${error.message}`);

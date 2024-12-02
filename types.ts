@@ -19,3 +19,12 @@ export interface ComponentInfo {
 		snake: string;
 	};
 }
+
+export const STARTER_TEMPLATES = {
+	ReactComponent: {
+		name: 'React Component',
+		path: './templates/ReactComponent',
+	},
+} as const;
+
+export type TemplateType = keyof typeof STARTER_TEMPLATES;
