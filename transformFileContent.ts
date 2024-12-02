@@ -13,23 +13,22 @@ export async function transformFileContent(
 	const content = await Deno.readTextFile(sourceFilePath);
 	let transformedContent = content;
 
-	// Replace all variations
 	const { variations } = componentInfo;
 	transformedContent = transformedContent.replaceAll(
 		variations.pascal,
-		'{{pascalCase name}}'
+		'{{pascalCaseName}}'
 	);
 	transformedContent = transformedContent.replaceAll(
 		variations.camel,
-		'{{camelCase name}}'
+		'{{camelCaseName}}'
 	);
 	transformedContent = transformedContent.replaceAll(
 		variations.kebab,
-		'{{kebabCase name}}'
+		'{{kebabCaseName}}'
 	);
 	transformedContent = transformedContent.replaceAll(
 		variations.snake,
-		'{{snakeCase name}}'
+		'{{snakeCaseName}}'
 	);
 
 	return transformedContent;

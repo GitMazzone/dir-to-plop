@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import { {{pascalCase name}}Renderer } from './{{pascalCase name}}.renderer';
+import { {{pascalCaseName}}Renderer } from './{{pascalCaseName}}.renderer';
 
-describe('{{pascalCase name}}Renderer', () => {
+describe('{{pascalCaseName}}Renderer', () => {
   it('should show loading state', () => {
-    render(<{{pascalCase name}}Renderer data="" isLoading={true} />);
+    render(<{{pascalCaseName}}Renderer data="" isLoading={true} />);
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('should render data when loaded', () => {
-    render(<{{pascalCase name}}Renderer data="Test Data" isLoading={false} />);
+    render(<{{pascalCaseName}}Renderer data="Test Data" isLoading={false} />);
 
     expect(screen.getByText('Test Data')).toBeInTheDocument();
   });

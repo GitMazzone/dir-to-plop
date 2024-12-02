@@ -1,13 +1,13 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { {{pascalCase name}} } from './{{pascalCase name}}';
+import { {{pascalCaseName}} } from './{{pascalCaseName}}';
 
-jest.mock('./utils/get{{pascalCase name}}.util', () => ({
-  get{{pascalCase name}}: () => Promise.resolve('Mocked Data')
+jest.mock('./utils/get{{pascalCaseName}}.util', () => ({
+  get{{pascalCaseName}}: () => Promise.resolve('Mocked Data')
 }));
 
-describe('{{pascalCase name}}', () => {
+describe('{{pascalCaseName}}', () => {
   it('should render data after loading', async () => {
-    render(<{{pascalCase name}} />);
+    render(<{{pascalCaseName}} />);
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
     await waitFor(() => {

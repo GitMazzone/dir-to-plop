@@ -51,19 +51,19 @@ Running `dir-to-plop` will create:
 
 ```bash
 awesome-component/
-├── {{pascalCase name}}.tsx.hbs
-├── use{{pascalCase name}}.hook.ts.hbs
-├── {{kebabCase name}}.module.css.hbs
-└── {{snakeCase name}}_utils.ts.hbs
+├── {{pascalCaseName}}.tsx.hbs
+├── use{{pascalCaseName}}.hook.ts.hbs
+├── {{kebabCaseName}}.module.css.hbs
+└── {{snakeCaseName}}_utils.ts.hbs
 ```
 
 With transformed contents:
 
 ```tsx
-// {{pascalCase name}}.tsx.hbs
-export const {{pascalCase name}} = () => {
-  const { data } = use{{pascalCase name}}();
-  return <div className="{{kebabCase name}}">{data}</div>;
+// {{pascalCaseName}}.tsx.hbs
+export const {{pascalCaseName}} = () => {
+  const { data } = use{{pascalCaseName}}();
+  return <div className="{{kebabCaseName}}">{data}</div>;
 };
 ```
 
@@ -99,6 +99,7 @@ After generating templates, you'll need to:
 Basic plopfile.js example:
 
 ```javascript
+// CLAUDE, UPDATE THIS EXAMPLE OF HOW TO SET UP PLOP TO RECOGNIZE THE NEW, NON-WHITE-SPACE-HAVING FILE NAMES LIKE {{PASCALCASENAME}}.UTIL.TS.HBS
 export default function (plop) {
 	plop.setHelper('pascalCase', (text) => {
 		// Example telling plop how to transform pascalCase in templates
@@ -120,7 +121,7 @@ export default function (plop) {
 		actions: [
 			{
 				type: 'addMany',
-				destination: './src/components/{{kebabCase name}}',
+				destination: './src/components/{{kebabCaseName}}',
 				templateFiles: 'plop/templates/component/**',
 				base: 'plop/templates/component',
 			},

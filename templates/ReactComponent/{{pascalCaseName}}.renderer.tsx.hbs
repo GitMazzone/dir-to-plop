@@ -1,0 +1,12 @@
+import styles from './{{pascalCaseName}}.module.css';
+import type { {{pascalCaseName}}RendererProps } from './{{pascalCaseName}}.types';
+
+export function {{pascalCaseName}}Renderer({ data, isLoading, className }: {{pascalCaseName}}RendererProps) {
+  if (isLoading) return <div>Loading...</div>;
+
+  return (
+    <div className={`${styles.container} ${className || ''}`}>
+      {data}
+    </div>
+  );
+}

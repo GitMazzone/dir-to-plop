@@ -122,22 +122,22 @@ export async function convertToTemplate(
 		if (newFileName.includes(componentInfo.variations.pascal)) {
 			newFileName = newFileName.replace(
 				componentInfo.variations.pascal,
-				'{{pascalCase name}}'
+				'{{pascalCaseName}}'
 			);
 		} else if (newFileName.includes(componentInfo.variations.camel)) {
 			newFileName = newFileName.replace(
 				componentInfo.variations.camel,
-				'{{camelCase name}}'
+				'{{camelCaseName}}'
 			);
 		} else if (newFileName.includes(componentInfo.variations.kebab)) {
 			newFileName = newFileName.replace(
 				componentInfo.variations.kebab,
-				'{{kebabCase name}}'
+				'{{kebabCaseName}}'
 			);
 		} else if (newFileName.includes(componentInfo.variations.snake)) {
 			newFileName = newFileName.replace(
 				componentInfo.variations.snake,
-				'{{snakeCase name}}'
+				'{{snakeCaseName}}'
 			);
 		}
 		newFileName += '.hbs';

@@ -38,22 +38,22 @@ Deno.test({
 
 		// Verify transformations
 		assertEquals(
-			transformed.includes('export const {{pascalCase name}}'),
+			transformed.includes('export const {{pascalCaseName}}'),
 			true,
 			'Should replace PascalCase'
 		);
 		assertEquals(
-			transformed.includes('const {{camelCase name}}'),
+			transformed.includes('const {{camelCaseName}}'),
 			true,
 			'Should replace camelCase'
 		);
 		assertEquals(
-			transformed.includes('className="{{kebabCase name}}"'),
+			transformed.includes('className="{{kebabCaseName}}"'),
 			true,
 			'Should replace kebab-case'
 		);
 		assertEquals(
-			transformed.includes('{{{snakeCase name}}}'),
+			transformed.includes('{{{snakeCaseName}}}'),
 			true,
 			'Should replace snake_case'
 		);

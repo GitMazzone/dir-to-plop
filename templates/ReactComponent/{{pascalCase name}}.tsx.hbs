@@ -1,9 +1,0 @@
-import { use{{pascalCase name}} } from './hooks';
-import { {{pascalCase name}}Renderer } from './{{pascalCase name}}.renderer';
-import type { {{pascalCase name}}Props } from './{{pascalCase name}}.types';
-
-export function {{pascalCase name}}({ className }: {{pascalCase name}}Props) {
-  const { data, isLoading } = use{{pascalCase name}}();
-
-  return <{{pascalCase name}}Renderer data={data} isLoading={isLoading} className={className} />;
-}

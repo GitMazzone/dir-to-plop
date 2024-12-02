@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { get{{pascalCase name}} } from '../utils';
-import type { {{pascalCase name}}RendererProps } from '../{{pascalCase name}}.types';
+import { get{{pascalCaseName}} } from '../utils';
+import type { {{pascalCaseName}}RendererProps } from '../{{pascalCaseName}}.types';
 
-export function use{{pascalCase name}}(): Omit<{{pascalCase name}}RendererProps, 'className'> {
+export function use{{pascalCaseName}}(): Omit<{{pascalCaseName}}RendererProps, 'className'> {
   const [data, setData] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await get{{pascalCase name}}();
+      const result = await get{{pascalCaseName}}();
       setData(result);
       setIsLoading(false);
     };
