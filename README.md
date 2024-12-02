@@ -15,7 +15,14 @@ deno run --allow-read --allow-write jsr:@gitmazzone/dir-to-plop@0.1.0 ./source .
 ## Usage
 
 ```bash
+# Convert existing component to template
 dir-to-plop ./components/MyAwesomeComponent ./plop/templates/awesome-component
+
+# Generate from starter template (interactive)
+dir-to-plop --starter ./plop/templates/new-component
+
+# Generate React component template directly
+dir-to-plop --starter-react-component ./plop/templates/new-component
 ```
 
 ### Example
@@ -70,6 +77,7 @@ export const {{pascalCase name}} = () => {
   - snake_case (my_component)
 - ✅ Maintains directory structure
 - ✅ Adds .hbs extension to all files
+- ✅ Provides an opinionated React Component starter template
 
 ## Limitations & TODOs
 
@@ -79,15 +87,6 @@ Current limitations:
 - Does not automatically configure Plop helpers (like pascalCase, camelCase)
 - Only handles basic naming patterns - complex or nested component names might need manual adjustment
 - Only processes text files - binary files are copied as-is
-
-Planned features:
-
-- [ ] Optionally generate basic plopfile.js with common helpers
-- [ ] Allow customization of naming patterns
-- [ ] Support for additional file types and patterns
-- [ ] Interactive mode for confirming transformations
-- [ ] Support for multiple component names in a single template
-- [ ] Configuration file for custom rules and patterns
 
 ## Setting up Plop
 
@@ -132,7 +131,7 @@ export default function (plop) {
 
 ## Contributing
 
-Issues and PRs welcome! Check out the TODOs above for planned features.
+Issues and PRs welcome!
 
 ## License
 
