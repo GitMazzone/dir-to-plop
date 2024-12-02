@@ -99,7 +99,6 @@ After generating templates, you'll need to:
 Basic plopfile.js example:
 
 ```javascript
-// CLAUDE, UPDATE THIS EXAMPLE OF HOW TO SET UP PLOP TO RECOGNIZE THE NEW, NON-WHITE-SPACE-HAVING FILE NAMES LIKE {{PASCALCASENAME}}.UTIL.TS.HBS
 export default function (plop) {
 	plop.setHelper('pascalCase', (text) => {
 		// Example telling plop how to transform pascalCase in templates
